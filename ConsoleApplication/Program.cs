@@ -1,29 +1,62 @@
-﻿namespace ConsoleApplication
+namespace ConsoleApplication
 {
-    internal class Program
+    using System;
+
+    namespace BMI_Calculator
     {
-        static void Main(string[] args)
+        internal class Program
         {
-            string name = "";
-            int height = 0;
-            Console.WriteLine("Hello, World!");
-            Console.WriteLine();
-            Console.Write("please input full name(Eng):");
-            name = Console.ReadLine();
+            static void Main(string[] args)
+            {
+                //รับชื่อ
+                Console.Write("Enter your name: ");
+                string name = Console.ReadLine();
+                
 
-            Console.WriteLine("Hello,Welcome" + name);
+                // รับค่าน้ำหนัก
+                Console.Write("Enter your weight (kg): ");
+                double weight = double.Parse(Console.ReadLine());
 
-            Console.Write("Please input you height(cm):");
-            height = Convert.ToInt16(Console.ReadLine());
-            double weight = height - 100;
+                // รับค่าส่วนสูง
+                Console.Write("Enter your height (cm): ");
+                double heightCm = double.Parse(Console.ReadLine());
 
-            Console.WriteLine("Your ideal weight is" + weight.ToString());
+                // แปลงเป็นเมตร
+                double heightM = heightCm / 100;
 
-            Console.WriteLine();
-            Console.WriteLine("Press any key to end program");
-            Console.WriteLine();
-            
+                // คำนวณ BMI
+                double bmi = weight / (heightM * heightM);
 
+                // แสดงค่า BMI
+                Console.WriteLine($"\nYour BMI is: {bmi:F2}");
+
+                // แปลผล BMI
+                string result = ""; // ผลลัพธ์การแปลผล BMI
+
+                if (bmi < 18.5)
+                {
+                    result = "Underweight"; //ผอมเกินไป
+                }
+                else if (bmi >= 18.5 && bmi <= 22.9)
+                {
+                    result = "Normal weight"; //น้ำหนักปกติ
+                }
+                else if (bmi >= 23 && bmi <= 24.9)
+                {
+                    result = "Overweight"; //น้ำหนักเกิน
+                }
+                else if (bmi >= 25 && bmi <= 29.9)
+                {
+                    result = "Obese (Level 1)"; //อ้วนระดับ 1
+                }
+                else
+                {
+                    result = "Obese (Level 2)";//อ้วนระดับ 2
+                }
+
+                Console.WriteLine("Result: " + result); // แสดงผลลัพธ์
+            }
         }
     }
+
 }
